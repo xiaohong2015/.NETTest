@@ -1,0 +1,42 @@
+1.添加新建项，搜索 linq 
+2.打开该文件，视图-服务器，连接到数据库，可以拖拽表到该文件上。
+
+string action = Request["action"];
+switch (action)
+{
+	case "Delete": Delete(); break;
+	default: InitList(); break;
+}
+
+// 弹窗交互
+Response.Write("<script language=javascript>alert('"+ message+"');</script>"); 
+
+using (DataAppDataContext db = new DataAppDataContext())
+{
+	// 增
+	user u= new user();
+	u.name= "xiaohong";
+	db.user.InsertOnSubmit(u);
+				 
+	// 删
+	var list = from s in db.user
+				 where s.id == id
+				 select s;
+	db.user.DeleteAllOnSubmit(list);
+	
+	// 改
+	user u = db.user.SingleOrDefault(s => s.id == id);
+	user.name = "xiaohong";
+	
+	// 查
+	var list = from s in db.user 
+			   select s;
+
+	var list = from s in db.user
+				 join t in db.department on s.did equals t.id
+				 where s.id == id
+				 select s;
+				 
+	// 最后记得加上 commit 
+	db.SubmitChanges();
+}

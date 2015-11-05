@@ -1,0 +1,9 @@
+1.添加新建项，搜索 dataset
+2.连接数据库，拖拽数据表
+
+
+userTableAdapter uta = new userTableAdapter(); // 直接调用内置api或存储过程
+
+DataSet1.customDataTable t = cta.GetData(); // 类型接收并输出
+foreach(DataSet1.customRow r in t) {}
+
